@@ -5,4 +5,13 @@ class User < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 20 }
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :dob, presence: true
+
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  def age
+    now = Time.now.utc.to_date
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
 end
