@@ -16,4 +16,9 @@ class User < ApplicationRecord
     now = Time.now.utc.to_date
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
+
+  def self.from_token_request request
+    username = request.params['auth'] && request.params['auth']['username']
+    find_by username: username
+  end
 end
