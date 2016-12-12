@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :transfers
 
+  validates :username, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :first_name, presence: true, length: { maximum: 20 }
   validates :last_name, presence: true, length: { maximum: 20 }
   validates :first_name, presence: true, length: { maximum: 50 }
